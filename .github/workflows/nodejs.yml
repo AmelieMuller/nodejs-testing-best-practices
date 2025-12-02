@@ -31,6 +31,10 @@ jobs:
 
   test_front:
     runs-on: ubuntu-latest
+    if: |
+      contains(join(github.event.head_commit.added, ','), 'example-application/') ||
+      contains(join(github.event.head_commit.modified, ','), 'example-application/') ||
+      contains(join(github.event.head_commit.removed, ','), 'example-application/')
     needs: install
 
     steps:
@@ -48,6 +52,10 @@ jobs:
 
   test_backend:
     runs-on: ubuntu-latest
+    if: |
+      contains(join(github.event.head_commit.added, ','), 'recipes/') ||
+      contains(join(github.event.head_commit.modified, ','), 'recipes/') ||
+      contains(join(github.event.head_commit.removed, ','), 'recipes/')
     needs: install
 
     steps:
